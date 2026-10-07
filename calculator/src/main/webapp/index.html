@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Calculator</title>
+
+    <script>
+        function calculate(event) {
+            if (event) event.preventDefault();
+            const val1 = document.getElementById("input1").value;
+            const val2 = document.getElementById("input2").value;
+            const op = document.getElementById("operation").value;
+            const resultField = document.getElementById("result");
+
+            if (val1 === "" || val2 === "") {
+                resultField.value = "Please enter both numbers";
+                return;
+            }
+
+            const num1 = parseFloat(val1);
+            const num2 = parseFloat(val2);
+
+            let res;
+            switch (op) {
+                case "ADD":
+                    res = num1 + num2;
+                    break;
+                case "SUBTRACT":
+                    res = num1 - num2;
+                    break;
+                case "MULTIPLY":
+                    res = num1 * num2;
+                    break;
+                case "DIVIDE":
+                    if (num2 === 0) {
+                        resultField.value = "Error: Division by zero";
+                        return;
+                    }
+                    res = num1 / num2;
+                    break;
+                default:
+                    resultField.value = "Please select an operation";
+                    return;
+            }
+            resultField.value = res;
+        }
+
+        function resetCalculator(event) {
+            if (event) event.preventDefault();
+            document.getElementById("input1").value = "";
+            document.getElementById("input2").value = "";
+            document.getElementById("operation").value = "Select";
+            document.getElementById("result").value = "";
+        }
+    </script>
+</head>
+
+<body>
+
+    <font size="20" color="blue">
+        Calculator
+    </font>
+
+    <br><br>
+
+    Input1:
+    <input type="number" id="input1">
+
+    <br><br>
+
+    Input2:
+    <input type="number" id="input2">
+
+    <br><br>
+
+    Select Operation:
+
+    <select id="operation">
+
+        <option value="Select">Select..</option>
+
+        <option value="ADD">ADD</option>
+
+        <option value="SUBTRACT">SUBTRACT</option>
+
+        <option value="MULTIPLY">MULTIPLY</option>
+
+        <option value="DIVIDE">DIVIDE</option>
+
+    </select>
+
+    <br><br>
+
+    <button onclick="calculate(event)">
+        Calculate
+    </button>
+
+    <button onclick="resetCalculator(event)">
+        Reset
+    </button>
+
+    <br><br>
+
+    Result:
+    <input type="text" id="result" readonly>
+
+</body>
+
+</html>
